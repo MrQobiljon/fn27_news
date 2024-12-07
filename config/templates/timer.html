@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaqtni Ortga Sanash</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.countdown-container {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#countdown {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#countdown div {
+    text-align: center;
+    margin: 0 10px;
+}
+
+#countdown span {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+#countdown p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>Vaqtni Ortga Sanash</h1>
+        <div id="countdown">
+            <div><span id="days">00</span><p>KUN</p></div>
+            <div><span id="hours">00</span><p>SOAT</p></div>
+            <div><span id="minutes">00</span><p>DAQIQA</p></div>
+            <div><span id="seconds">00</span><p>SONIYA</p></div>
+        </div>
+    </div>
+
+
+<script>
+    // Maqsadli vaqtni o'rnating (kun/soat/daqiqa/soniya formatida)
+const targetDate = new Date("2024-12-26T23:59:59").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+
+    // Vaqtni hisoblang
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    // Ekranga chiqarish
+    document.getElementById("days").textContent = days < 10 ? "0" + days : days;
+    document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
+    document.getElementById("minutes").textContent = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("seconds").textContent = seconds < 10 ? "0" + seconds : seconds;
+
+    // Agar vaqt tugasa
+    if (timeLeft < 0) {
+        clearInterval(interval);
+        document.getElementById("countdown").innerHTML = "<h2>Vaqt tugadi!</h2>";
+    }
+}
+
+// Har soniyada yangilab turish
+const interval = setInterval(updateCountdown, 1000);
+
+// Dastlab yangilash
+updateCountdown();
+
+</script>
+
+
+
+</body>
+</html>
