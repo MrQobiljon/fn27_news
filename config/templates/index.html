@@ -6,9 +6,28 @@
 </head>
 <body>
 
-<h1>Salom Dunyo</h1>
+<h1>Yangiliklar</h1>
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZFsMo-w00y09aJykeWkXo7Nxudybu1fWKMQ&s">
+<div style="display: flex; flex-direction: initial;">
+{% for category in categories %}
+<div><a href="">{{ category }}&nbsp;&nbsp;&nbsp;</a></div>
+{% endfor %}
+    </div>
+
+{% for post in posts %}
+<ul>
+    <li><h1><b>Nomi:</b> {{ post.title }}</h1></li>
+    <li><b>Matni:</b> {{ post.content }}</li>
+    <li><b>Qo'shilgan vaqti:</b> {{ post.created }}</li>
+    <li><b>Ko'rishlar soni:</b> {{ post.views }}</li>
+    <li><b>Kategoriya:</b> {{ post.category }}</li>
+    {% if post.photo %}
+    <li><img src="{{ post.photo.url }}" width="200px"></li>
+    {% else %}
+    <li><img src="https://i.pinimg.com/236x/78/0b/c9/780bc94187c2ece6350465393273db75.jpg" width="200px"></li>
+    {% endif %}
+</ul>
+{% endfor %}
 
 </body>
 </html>
